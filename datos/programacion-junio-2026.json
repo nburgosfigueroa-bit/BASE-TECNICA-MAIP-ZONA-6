@@ -1,0 +1,13 @@
+{
+  "periodo": "junio 2026",
+  "zona": 6,
+  "fuente": "GANTT BT - JUNIO 2026.xlsx",
+  "privacidad": "Extracto sin nombres, RUT, patentes ni teléfonos",
+  "resumen": {
+    "areas_por_ciclo_de_corte": 436,
+    "ciclos_de_corte": 2,
+    "sectores_priorizados_de_riego": 8,
+    "intervenciones_de_infraestructura": 23,
+    "turnos_especiales": ["sábado 15:00-20:00", "domingo 08:00-13:00"]
+  }
+}
