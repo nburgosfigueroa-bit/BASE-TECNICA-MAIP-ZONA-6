@@ -324,13 +324,6 @@
           "aviso": "Encargado de equipo"
         },
         {
-          "orden": 5,
-          "hito": "Poda o tala",
-          "cuando": "Sólo con instrucción",
-          "accion": "Delimitar el área y usar el procedimiento y EPP específicos.",
-          "aviso": "Encargado de arbolado"
-        },
-        {
           "orden": 6,
           "hito": "Infraestructura",
           "cuando": "Según orden de trabajo",
@@ -375,13 +368,6 @@
           "clave": "Dos ciclos mensuales"
         },
         {
-          "orden": 4,
-          "programa": "Poda",
-          "periodo": "Junio 2026",
-          "alcance": "Áreas verdes y arbolado urbano",
-          "clave": "Sólo personal autorizado"
-        },
-        {
           "orden": 5,
           "programa": "Infraestructura",
           "periodo": "Junio 2026",
@@ -392,7 +378,7 @@
           "orden": 6,
           "programa": "Emergencias",
           "periodo": "24/7",
-          "alcance": "Cuadrilla y vehículo disponibles",
+          "alcance": "Disponibilidad permanente del servicio",
           "clave": "Respuesta coordinada con supervisión"
         }
       ]
