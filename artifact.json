@@ -1,394 +1,398 @@
 {
-  "surface": "dashboard",
-  "manifest": {
-    "version": 1,
-    "surface": "dashboard",
-    "title": "Base Técnica Maipú Zona 6",
-    "description": "Hitos operativos esenciales para trabajadores de mantención de áreas verdes.",
-    "generatedAt": "2026-08-04T13:45:00-04:00",
-    "cards": [
-      {
-        "id": "cobertura-corte",
-        "description": "Cada ciclo mensual considera todas las áreas programadas de la Zona 6.",
-        "dataset": "resumen",
-        "sourceId": "gantt-junio",
-        "metrics": [
-          {
-            "label": "Áreas por ciclo",
-            "field": "areas_por_ciclo",
-            "format": "number"
-          }
-        ]
-      },
-      {
-        "id": "ciclos-corte",
-        "description": "Primer y segundo corte dentro del mes operativo.",
-        "dataset": "resumen",
-        "sourceId": "gantt-junio",
-        "metrics": [
-          {
-            "label": "Ciclos de corte",
-            "field": "ciclos_corte",
-            "format": "number"
-          }
-        ]
-      },
-      {
-        "id": "emergencia",
-        "description": "Disponibilidad exigida de lunes a domingo durante todo el año.",
-        "dataset": "resumen",
-        "sourceId": "bases-tecnicas",
-        "metrics": [
-          {
-            "label": "Emergencias",
-            "field": "emergencia",
-            "format": "number"
-          }
-        ]
-      },
-      {
-        "id": "proteccion-solar",
-        "description": "Aplicar al inicio de la jornada y volver a aplicar durante el día.",
-        "dataset": "resumen",
-        "sourceId": "bases-tecnicas",
-        "metrics": [
-          {
-            "label": "Reaplicar protector",
-            "field": "protector_horas",
-            "format": "number"
-          }
-        ]
-      }
-    ],
-    "charts": [
-      {
-        "id": "turnos",
-        "title": "Extensión de los turnos planificados",
-        "subtitle": "Horas entre inicio y término; revisar la asignación diaria con la jefatura.",
-        "type": "bar",
-        "dataset": "turnos",
-        "sourceId": "gantt-junio",
-        "intent": "comparison",
-        "question": "¿Qué extensión tiene cada turno operativo?",
-        "encodings": {
-          "x": {
-            "field": "turno",
-            "type": "nominal",
-            "label": "Turno"
-          },
-          "y": {
-            "field": "horas",
-            "type": "quantitative",
-            "label": "Horas",
-            "format": "number"
-          }
-        },
-        "xAxisTitle": "Turno",
-        "yAxisTitle": "Horas",
-        "valueFormat": "number",
-        "layout": "full",
-        "maxRows": 5
-      }
-    ],
-    "tables": [
-      {
-        "id": "hitos-operativos",
-        "title": "Hitos operativos que debes cumplir",
-        "subtitle": "Consulta el programa del día antes de iniciar el trabajo.",
-        "dataset": "hitos",
-        "sourceId": "bases-tecnicas",
-        "layout": "full",
-        "density": "spacious",
-        "defaultSort": {
-          "field": "hito",
-          "direction": "asc"
-        },
-        "columns": [
-          {
-            "field": "hito",
-            "label": "Hito",
-            "type": "text"
-          },
-          {
-            "field": "cuando",
-            "label": "Cuándo",
-            "type": "text"
-          },
-          {
-            "field": "accion",
-            "label": "Qué debes hacer",
-            "type": "text"
-          },
-          {
-            "field": "aviso",
-            "label": "Avisar a",
-            "type": "text"
-          }
-        ]
-      },
-      {
-        "id": "programacion-junio",
-        "title": "Programación operativa de referencia",
-        "subtitle": "Resumen del archivo maestro de junio de 2026.",
-        "dataset": "programacion",
-        "sourceId": "gantt-junio",
-        "layout": "full",
-        "density": "dense",
-        "defaultSort": {
-          "field": "programa",
-          "direction": "asc"
-        },
-        "columns": [
-          {
-            "field": "programa",
-            "label": "Programa",
-            "type": "text"
-          },
-          {
-            "field": "periodo",
-            "label": "Periodo",
-            "type": "text"
-          },
-          {
-            "field": "alcance",
-            "label": "Alcance",
-            "type": "text"
-          },
-          {
-            "field": "clave",
-            "label": "Clave para terreno",
-            "type": "text"
-          }
-        ]
-      }
-    ],
-    "sources": [
-      {
-        "id": "bases-tecnicas",
-        "label": "Bases Técnicas Generales de Licitación, 2024",
-        "query": {
-          "engine": "revisión documental",
-          "language": "sql",
-          "sql": "SELECT 24 AS emergencia, 2 AS protector_horas FROM bases_tecnicas_zona_6 WHERE seccion IN ('3.8.6', '3.13.4')",
-          "description": "Extracción manual verificada de obligaciones de emergencia y protección solar.",
-          "executed_at": "2026-08-04T13:30:00-04:00",
-          "tables_used": [
-            "BASES_TECNICAS_ZONA_6.pdf"
-          ],
-          "filters": [
-            "Secciones 3.8.6 y 3.13.4"
-          ],
-          "metric_definitions": [
-            "Emergencias: disponibilidad las 24 horas.",
-            "Protección solar: reaplicación cada 2 horas."
-          ]
-        }
-      },
-      {
-        "id": "gantt-junio",
-        "label": "GANTT BT - junio 2026, extracto revisado",
-        "href": "datos/programacion-junio-2026.json",
-        "query": {
-          "engine": "planilla revisada",
-          "language": "sql",
-          "sql": "SELECT 436 AS areas_por_ciclo, 2 AS ciclos_corte FROM gantt_junio_2026 WHERE zona = 6",
-          "description": "Extracción manual verificada de la programación operativa de junio de 2026.",
-          "executed_at": "2026-08-04T13:35:00-04:00",
-          "tables_used": [
-            "GANTT BT - JUNIO 2026.xlsx"
-          ],
-          "filters": [
-            "Zona 6",
-            "Junio de 2026",
-            "Sin datos personales"
-          ],
-          "metric_definitions": [
-            "Áreas por ciclo: 436.",
-            "Ciclos de corte: 2."
-          ]
-        }
-      }
-    ],
-    "blocks": [
-      {
-        "id": "encabezado",
-        "type": "markdown",
-        "body": "## 1. Lo esencial para tu jornada\nEste tablero resume obligaciones de terreno. La instrucción diaria de tu jefatura y las medidas de seguridad siempre tienen prioridad."
-      },
-      {
-        "id": "indicadores",
-        "type": "metric-strip",
-        "cardIds": [
-          "cobertura-corte",
-          "ciclos-corte",
-          "emergencia",
-          "proteccion-solar"
-        ]
-      },
-      {
-        "id": "seguridad",
-        "type": "markdown",
-        "body": "## 2. Antes de comenzar\nUsa uniforme completo y limpio, revisa tus elementos de protección personal, participa en el análisis seguro del trabajo y confirma herramientas, señalización y zona de trabajo. Informa de inmediato cualquier condición insegura, accidente, daño o cambio en la tarea.",
-        "sourceId": "bases-tecnicas"
-      },
-      {
-        "id": "tabla-hitos",
-        "type": "table",
-        "tableId": "hitos-operativos"
-      },
-      {
-        "id": "programacion",
-        "type": "markdown",
-        "body": "## 3. Programación y respuesta\nLa planificación cambia por clima, emergencias, instrucciones municipales y condiciones del terreno. Confirma cada día el lugar, la cuadrilla y el trabajo asignado."
-      },
-      {
-        "id": "grafico-turnos",
-        "type": "chart",
-        "chartId": "turnos"
-      },
-      {
-        "id": "tabla-programacion",
-        "type": "table",
-        "tableId": "programacion-junio"
-      },
-      {
-        "id": "nota-final",
-        "type": "markdown",
-        "body": "### En caso de emergencia\nDetén la labor si existe riesgo inmediato, protege el sector, avisa a tu encargado y sigue el procedimiento de emergencia. No improvises maniobras ni uses equipos para los que no estés autorizado o capacitado.",
-        "sourceId": "bases-tecnicas"
-      }
-    ]
-  },
-  "snapshot": {
-    "version": 1,
-    "generatedAt": "2026-08-04T13:45:00-04:00",
-    "status": "ready",
-    "datasets": {
-      "resumen": [
-        {
-          "areas_por_ciclo": 436,
-          "ciclos_corte": 2,
-          "emergencia": 24,
-          "protector_horas": 2
-        }
-      ],
-      "turnos": [
-        {
-          "turno": "Lun-mar",
-          "horas": 9
-        },
-        {
-          "turno": "Mié-vie",
-          "horas": 8
-        },
-        {
-          "turno": "Sábado",
-          "horas": 5
-        },
-        {
-          "turno": "Sáb. especial",
-          "horas": 5
-        },
-        {
-          "turno": "Dom. especial",
-          "horas": 5
-        }
-      ],
-      "hitos": [
-        {
-          "orden": 1,
-          "hito": "Inicio de jornada",
-          "cuando": "Antes de trabajar",
-          "accion": "Revisar asignación, uniforme, EPP, herramientas y señalización.",
-          "aviso": "Encargado de equipo"
-        },
-        {
-          "orden": 2,
-          "hito": "Aseo y retiro",
-          "cuando": "Durante y al terminar",
-          "accion": "Mantener limpia el área y retirar excedentes según la instrucción.",
-          "aviso": "Encargado de equipo"
-        },
-        {
-          "orden": 3,
-          "hito": "Riego",
-          "cuando": "Según ruta y horario",
-          "accion": "Evitar pérdida de agua, anegamientos y daños a personas o bienes.",
-          "aviso": "Encargado de equipo"
-        },
-        {
-          "orden": 4,
-          "hito": "Corte y orillado",
-          "cuando": "Según programa",
-          "accion": "Señalizar, proteger a terceros y dejar el sector limpio al finalizar.",
-          "aviso": "Encargado de equipo"
-        },
-        {
-          "orden": 6,
-          "hito": "Infraestructura",
-          "cuando": "Según orden de trabajo",
-          "accion": "Aislar elementos peligrosos y reportar el trabajo terminado.",
-          "aviso": "Encargado de infraestructura"
-        },
-        {
-          "orden": 7,
-          "hito": "Protección solar",
-          "cuando": "Cada 2 horas",
-          "accion": "Aplicar protector solar y mantener protección de cabeza y piel.",
-          "aviso": "Encargado de equipo"
-        },
-        {
-          "orden": 8,
-          "hito": "Emergencia",
-          "cuando": "De inmediato",
-          "accion": "Detener, proteger el lugar y seguir las instrucciones de la cuadrilla de emergencia.",
-          "aviso": "Supervisor"
-        }
-      ],
-      "programacion": [
-        {
-          "orden": 1,
-          "programa": "Aseo",
-          "periodo": "Todos los días programados",
-          "alcance": "Aseo, riego y jardinería",
-          "clave": "Turnos regulares y especiales"
-        },
-        {
-          "orden": 2,
-          "programa": "Riego",
-          "periodo": "Junio 2026",
-          "alcance": "8 sectores priorizados, emergencias y apoyos",
-          "clave": "Confirmar ruta diaria"
-        },
-        {
-          "orden": 3,
-          "programa": "Corte de césped",
-          "periodo": "1-13 y 15-30 de junio",
-          "alcance": "436 áreas por ciclo",
-          "clave": "Dos ciclos mensuales"
-        },
-        {
-          "orden": 5,
-          "programa": "Infraestructura",
-          "periodo": "Junio 2026",
-          "alcance": "23 intervenciones programadas",
-          "clave": "Señalizar y reportar cierre"
-        },
-        {
-          "orden": 6,
-          "programa": "Emergencias",
-          "periodo": "24/7",
-          "alcance": "Disponibilidad permanente del servicio",
-          "clave": "Respuesta coordinada con supervisión"
-        }
-      ]
-    },
-    "accessIssues": []
-  },
-  "sources": [
-    {
-      "id": "gantt-junio",
-      "href": "datos/programacion-junio-2026.json"
-    }
-  ]
+    "surface":  "dashboard",
+    "manifest":  {
+                     "version":  1,
+                     "surface":  "dashboard",
+                     "title":  "Base Técnica Maipú Zona 6",
+                     "description":  "Hitos operativos esenciales para trabajadores de mantención de áreas verdes.",
+                     "generatedAt":  "2026-08-04T13:45:00-04:00",
+                     "cards":  [
+                                   {
+                                       "id":  "cobertura-corte",
+                                       "description":  "Cada ciclo mensual considera todas las áreas programadas de la Zona 6.",
+                                       "dataset":  "resumen",
+                                       "sourceId":  "gantt-junio",
+                                       "metrics":  [
+                                                       {
+                                                           "label":  "Áreas por ciclo",
+                                                           "field":  "areas_por_ciclo",
+                                                           "format":  "number"
+                                                       }
+                                                   ]
+                                   },
+                                   {
+                                       "id":  "ciclos-corte",
+                                       "description":  "Primer y segundo corte dentro del mes operativo.",
+                                       "dataset":  "resumen",
+                                       "sourceId":  "gantt-junio",
+                                       "metrics":  [
+                                                       {
+                                                           "label":  "Ciclos de corte",
+                                                           "field":  "ciclos_corte",
+                                                           "format":  "number"
+                                                       }
+                                                   ]
+                                   },
+                                   {
+                                       "id":  "emergencia",
+                                       "description":  "Disponibilidad exigida de lunes a domingo durante todo el año.",
+                                       "dataset":  "resumen",
+                                       "sourceId":  "bases-tecnicas",
+                                       "metrics":  [
+                                                       {
+                                                           "label":  "Emergencias",
+                                                           "field":  "emergencia",
+                                                           "format":  "number"
+                                                       }
+                                                   ]
+                                   },
+                                   {
+                                       "id":  "proteccion-solar",
+                                       "description":  "Aplicar al inicio de la jornada y volver a aplicar durante el día.",
+                                       "dataset":  "resumen",
+                                       "sourceId":  "bases-tecnicas",
+                                       "metrics":  [
+                                                       {
+                                                           "label":  "Reaplicar protector",
+                                                           "field":  "protector_horas",
+                                                           "format":  "number"
+                                                       }
+                                                   ]
+                                   }
+                               ],
+                     "charts":  [
+                                    {
+                                        "id":  "turnos",
+                                        "title":  "Extensión de los turnos planificados",
+                                        "subtitle":  "Horas entre inicio y término; revisar la asignación diaria con la jefatura.",
+                                        "type":  "bar",
+                                        "dataset":  "turnos",
+                                        "sourceId":  "gantt-junio",
+                                        "intent":  "comparison",
+                                        "question":  "¿Qué extensión tiene cada turno operativo?",
+                                        "encodings":  {
+                                                          "x":  {
+                                                                    "field":  "turno",
+                                                                    "type":  "nominal",
+                                                                    "label":  "Turno"
+                                                                },
+                                                          "y":  {
+                                                                    "field":  "horas",
+                                                                    "type":  "quantitative",
+                                                                    "label":  "Horas",
+                                                                    "format":  "number"
+                                                                }
+                                                      },
+                                        "xAxisTitle":  "Turno",
+                                        "yAxisTitle":  "Horas",
+                                        "valueFormat":  "number",
+                                        "layout":  "full",
+                                        "maxRows":  5
+                                    }
+                                ],
+                     "tables":  [
+                                    {
+                                        "id":  "hitos-operativos",
+                                        "title":  "Hitos operativos que debes cumplir",
+                                        "subtitle":  "Consulta el programa del día antes de iniciar el trabajo.",
+                                        "dataset":  "hitos",
+                                        "sourceId":  "bases-tecnicas",
+                                        "layout":  "full",
+                                        "density":  "spacious",
+                                        "defaultSort":  {
+                                                            "field":  "hito",
+                                                            "direction":  "asc"
+                                                        },
+                                        "columns":  [
+                                                        {
+                                                            "field":  "hito",
+                                                            "label":  "Hito",
+                                                            "type":  "text"
+                                                        },
+                                                        {
+                                                            "field":  "cuando",
+                                                            "label":  "Cuándo",
+                                                            "type":  "text"
+                                                        },
+                                                        {
+                                                            "field":  "accion",
+                                                            "label":  "Qué debes hacer",
+                                                            "type":  "text"
+                                                        },
+                                                        {
+                                                            "field":  "aviso",
+                                                            "label":  "Avisar a",
+                                                            "type":  "text"
+                                                        }
+                                                    ]
+                                    },
+                                    {
+                                        "id":  "programacion-junio",
+                                        "title":  "Programación operativa de referencia",
+                                        "subtitle":  "Resumen del archivo maestro de junio de 2026.",
+                                        "dataset":  "programacion",
+                                        "sourceId":  "gantt-junio",
+                                        "layout":  "full",
+                                        "density":  "dense",
+                                        "defaultSort":  {
+                                                            "field":  "programa",
+                                                            "direction":  "asc"
+                                                        },
+                                        "columns":  [
+                                                        {
+                                                            "field":  "programa",
+                                                            "label":  "Programa",
+                                                            "type":  "text"
+                                                        },
+                                                        {
+                                                            "field":  "periodo",
+                                                            "label":  "Periodo",
+                                                            "type":  "text"
+                                                        },
+                                                        {
+                                                            "field":  "alcance",
+                                                            "label":  "Alcance",
+                                                            "type":  "text"
+                                                        },
+                                                        {
+                                                            "field":  "clave",
+                                                            "label":  "Clave para terreno",
+                                                            "type":  "text"
+                                                        }
+                                                    ]
+                                    }
+                                ],
+                     "sources":  [
+                                     {
+                                         "id":  "bases-tecnicas",
+                                         "label":  "Bases Técnicas Generales de Licitación, 2024",
+                                         "query":  {
+                                                       "engine":  "revisión documental",
+                                                       "language":  "sql",
+                                                       "sql":  "SELECT 24 AS emergencia, 2 AS protector_horas FROM bases_tecnicas_zona_6 WHERE seccion IN (\u00273.8.6\u0027, \u00273.13.4\u0027)",
+                                                       "description":  "Extracción manual verificada de obligaciones de emergencia y protección solar.",
+                                                       "executed_at":  "2026-08-04T13:30:00-04:00",
+                                                       "tables_used":  [
+                                                                           "BASES_TECNICAS_ZONA_6.pdf"
+                                                                       ],
+                                                       "filters":  [
+                                                                       "Secciones 3.8.6 y 3.13.4"
+                                                                   ],
+                                                       "metric_definitions":  [
+                                                                                  "Emergencias: disponibilidad las 24 horas.",
+                                                                                  "Protección solar: reaplicación cada 2 horas."
+                                                                              ]
+                                                   }
+                                     },
+                                     {
+                                         "id":  "gantt-junio",
+                                         "label":  "GANTT BT - junio 2026, extracto revisado",
+                                         "href":  "datos/programacion-junio-2026.json",
+                                         "query":  {
+                                                       "engine":  "planilla revisada",
+                                                       "language":  "sql",
+                                                       "sql":  "SELECT 436 AS areas_por_ciclo, 2 AS ciclos_corte FROM gantt_junio_2026 WHERE zona = 6",
+                                                       "description":  "Extracción manual verificada de la programación operativa de junio de 2026.",
+                                                       "executed_at":  "2026-08-04T13:35:00-04:00",
+                                                       "tables_used":  [
+                                                                           "GANTT BT - JUNIO 2026.xlsx"
+                                                                       ],
+                                                       "filters":  [
+                                                                       "Zona 6",
+                                                                       "Junio de 2026",
+                                                                       "Sin datos personales"
+                                                                   ],
+                                                       "metric_definitions":  [
+                                                                                  "Áreas por ciclo: 436.",
+                                                                                  "Ciclos de corte: 2."
+                                                                              ]
+                                                   }
+                                     }
+                                 ],
+                     "blocks":  [
+                                    {
+                                        "id":  "encabezado",
+                                        "type":  "markdown",
+                                        "body":  "## 1. Lo esencial para tu jornada\nEste tablero resume obligaciones de terreno. La instrucción diaria de tu jefatura y las medidas de seguridad siempre tienen prioridad."
+                                    },
+                                    {
+                                        "id":  "indicadores",
+                                        "type":  "metric-strip",
+                                        "cardIds":  [
+                                                        "cobertura-corte",
+                                                        "ciclos-corte",
+                                                        "emergencia",
+                                                        "proteccion-solar"
+                                                    ]
+                                    },
+                                    {
+                                        "id":  "seguridad",
+                                        "type":  "markdown",
+                                        "body":  "## 2. Antes de comenzar\nUsa uniforme completo y limpio, revisa tus elementos de protección personal, participa en el análisis seguro del trabajo y confirma herramientas, señalización y zona de trabajo. Informa de inmediato cualquier condición insegura, accidente, daño o cambio en la tarea.",
+                                        "sourceId":  "bases-tecnicas"
+                                    },
+                                    {
+                                        "id":  "tabla-hitos",
+                                        "type":  "table",
+                                        "tableId":  "hitos-operativos"
+                                    },
+                                    {
+                                        "id":  "programacion",
+                                        "type":  "markdown",
+                                        "body":  "## 3. Programación y respuesta\nLa planificación cambia por clima, emergencias, instrucciones municipales y condiciones del terreno. Confirma cada día el lugar, la cuadrilla y el trabajo asignado."
+                                    },
+                                    {
+                                        "id":  "grafico-turnos",
+                                        "type":  "chart",
+                                        "chartId":  "turnos"
+                                    },
+                                    {
+                                        "id":  "tabla-programacion",
+                                        "type":  "table",
+                                        "tableId":  "programacion-junio"
+                                    },
+                                    {
+                                        "id":  "nota-final",
+                                        "type":  "markdown",
+                                        "body":  "### En caso de emergencia\nDetén la labor si existe riesgo inmediato, protege el sector, avisa a tu encargado y sigue el procedimiento de emergencia. No improvises maniobras ni uses equipos para los que no estés autorizado o capacitado.",
+                                        "sourceId":  "bases-tecnicas"
+                                    }
+                                ]
+                 },
+    "snapshot":  {
+                     "version":  1,
+                     "generatedAt":  "2026-08-04T13:45:00-04:00",
+                     "status":  "ready",
+                     "datasets":  {
+                                      "resumen":  [
+                                                      {
+                                                          "areas_por_ciclo":  436,
+                                                          "ciclos_corte":  2,
+                                                          "emergencia":  24,
+                                                          "protector_horas":  2
+                                                      }
+                                                  ],
+                                      "turnos":  [
+                                                     {
+                                                         "turno":  "Lun-mar",
+                                                         "horas":  9
+                                                     },
+                                                     {
+                                                         "turno":  "Mié-vie",
+                                                         "horas":  8
+                                                     },
+                                                     {
+                                                         "turno":  "Sábado",
+                                                         "horas":  5
+                                                     },
+                                                     {
+                                                         "turno":  "Sáb. especial",
+                                                         "horas":  5
+                                                     },
+                                                     {
+                                                         "turno":  "Dom. especial",
+                                                         "horas":  5
+                                                     }
+                                                 ],
+                                      "hitos":  [
+                                                    {
+                                                        "orden":  1,
+                                                        "hito":  "Inicio de jornada",
+                                                        "cuando":  "Antes de trabajar",
+                                                        "accion":  "Revisar asignación, uniforme, EPP, herramientas y señalización.",
+                                                        "aviso":  "Encargado de equipo"
+                                                    },
+                                                    {
+                                                        "orden":  2,
+                                                        "hito":  "Aseo y retiro",
+                                                        "cuando":  "Durante y al terminar",
+                                                        "accion":  "Mantener limpia el área y retirar excedentes según la instrucción.",
+                                                        "aviso":  "Encargado de equipo"
+                                                    },
+                                                    {
+                                                        "orden":  3,
+                                                        "hito":  "Riego",
+                                                        "cuando":  "Según ruta y horario",
+                                                        "accion":  "Evitar pérdida de agua, anegamientos y daños a personas o bienes.",
+                                                        "aviso":  "Encargado de equipo"
+                                                    },
+                                                    {
+                                                        "orden":  4,
+                                                        "hito":  "Corte y orillado",
+                                                        "cuando":  "Según programa",
+                                                        "accion":  "Señalizar, proteger a terceros y dejar el sector limpio al finalizar.",
+                                                        "aviso":  "Encargado de equipo"
+                                                    },
+                                                    {
+                                                        "orden":  6,
+                                                        "hito":  "Infraestructura",
+                                                        "cuando":  "Según orden de trabajo",
+                                                        "accion":  "Aislar elementos peligrosos y reportar el trabajo terminado.",
+                                                        "aviso":  "Encargado de infraestructura"
+                                                    },
+                                                    {
+                                                        "orden":  7,
+                                                        "hito":  "Protección solar",
+                                                        "cuando":  "Cada 2 horas",
+                                                        "accion":  "Aplicar protector solar y mantener protección de cabeza y piel.",
+                                                        "aviso":  "Encargado de equipo"
+                                                    },
+                                                    {
+                                                        "orden":  8,
+                                                        "hito":  "Emergencia",
+                                                        "cuando":  "De inmediato",
+                                                        "accion":  "Detener, proteger el lugar y seguir las instrucciones de la cuadrilla de emergencia.",
+                                                        "aviso":  "Supervisor"
+                                                    }
+                                                ],
+                                      "programacion":  [
+                                                           {
+                                                               "orden":  1,
+                                                               "programa":  "Aseo",
+                                                               "periodo":  "Todos los días programados",
+                                                               "alcance":  "Aseo, riego y jardinería",
+                                                               "clave":  "Turnos regulares y especiales"
+                                                           },
+                                                           {
+                                                               "orden":  2,
+                                                               "programa":  "Riego",
+                                                               "periodo":  "Junio 2026",
+                                                               "alcance":  "8 sectores priorizados, emergencias y apoyos",
+                                                               "clave":  "Confirmar ruta diaria"
+                                                           },
+                                                           {
+                                                               "orden":  3,
+                                                               "programa":  "Corte de césped",
+                                                               "periodo":  "1-13 y 15-30 de junio",
+                                                               "alcance":  "436 áreas por ciclo",
+                                                               "clave":  "Dos ciclos mensuales"
+                                                           },
+                                                           {
+                                                               "orden":  5,
+                                                               "programa":  "Infraestructura",
+                                                               "periodo":  "Junio 2026",
+                                                               "alcance":  "23 intervenciones programadas",
+                                                               "clave":  "Señalizar y reportar cierre"
+                                                           },
+                                                           {
+                                                               "orden":  6,
+                                                               "programa":  "Emergencias",
+                                                               "periodo":  "24/7",
+                                                               "alcance":  "Disponibilidad permanente del servicio",
+                                                               "clave":  "Respuesta coordinada con supervisión"
+                                                           }
+                                                       ]
+                                  },
+                     "accessIssues":  [
+
+                                      ]
+                 },
+    "sources":  [
+                    {
+                        "id":  "gantt-junio",
+                        "href":  "datos/programacion-junio-2026.json"
+                    }
+                ],
+    "visualVersion":  "2026-08-14",
+    "visualStyle":  "Portada fotográfica verde oscuro, acento verde lima, navegación modular y tarjetas redondeadas"
 }
