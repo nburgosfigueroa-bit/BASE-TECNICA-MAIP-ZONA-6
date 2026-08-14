@@ -3,8 +3,8 @@
     "manifest":  {
                      "version":  1,
                      "surface":  "dashboard",
-                     "title":  "Base Técnica Maipú Zona 6",
-                     "description":  "Hitos operativos esenciales para trabajadores de mantención de áreas verdes.",
+                     "title":  "Base Técnica · Maipú Zona 6",
+                     "description":  "Guía operativa verificable con resumen contractual, pauta de servicios, dotación, capacitaciones, vestuario, programas y descargas.",
                      "generatedAt":  "2026-08-04T13:45:00-04:00",
                      "cards":  [
                                    {
@@ -381,7 +381,18 @@
                                                                "alcance":  "Disponibilidad permanente del servicio",
                                                                "clave":  "Respuesta coordinada con supervisión"
                                                            }
-                                                       ]
+                                                       ],
+                                      "resumen_operativo":  [
+                                                                {
+                                                                    "superficie_m2":  567375,
+                                                                    "areas_verdes":  324,
+                                                                    "dotacion_regular":  228,
+                                                                    "jardineros":  158,
+                                                                    "especialidades":  70,
+                                                                    "inicio_servicio":  "2025-01-02",
+                                                                    "duracion_meses":  60
+                                                                }
+                                                            ]
                                   },
                      "accessIssues":  [
 
@@ -393,6 +404,6 @@
                         "href":  "datos/programacion-junio-2026.json"
                     }
                 ],
-    "visualVersion":  "2026-08-14",
-    "visualStyle":  "Portada fotográfica verde oscuro, acento verde lima, navegación modular y tarjetas redondeadas"
+    "visualVersion":  "2026-08-14-v2",
+    "visualStyle":  "Portada fotográfica verde oscuro, acento verde lima, navegación modular, pauta desplegable y tarjetas redondeadas"
 }

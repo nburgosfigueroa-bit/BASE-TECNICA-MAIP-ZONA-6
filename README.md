@@ -1,38 +1,43 @@
 # Base Técnica · Maipú Zona 6
 
-> Biblioteca visual para consultar los principales requisitos técnicos y operativos del contrato de mantención de áreas verdes.
+Guía visual para consultar obligaciones operativas del contrato de mantención de áreas verdes, sus programas y fuentes vigentes.
 
-## 📘 Acceso directo
+## 1. Acceso
 
-### [ABRIR LA BASE TÉCNICA INTERACTIVA](https://nburgosfigueroa-bit.github.io/BASE-TECNICA-MAIP-ZONA-6/)
+[Abrir la Base Técnica interactiva](https://nburgosfigueroa-bit.github.io/BASE-TECNICA-MAIP-ZONA-6/)
 
-[Ver repositorio en GitHub](https://github.com/nburgosfigueroa-bit/BASE-TECNICA-MAIP-ZONA-6)
+[Ver el repositorio](https://github.com/nburgosfigueroa-bit/BASE-TECNICA-MAIP-ZONA-6)
 
-## 1. ¿Qué hace este proyecto?
+## 2. Contenido
 
-Presenta de manera clara y amigable los hitos operativos del contrato, permitiendo revisar obligaciones de seguridad, aseo, riego, corte, poda, infraestructura y programación de referencia.
+- Lectura rápida de superficie, áreas verdes, dotación e hitos.
+- Pauta desplegable de servicios desde el numeral 3.7.
+- Dotación vigente de Zona 6, capacitaciones, EPP y vestuario.
+- Programas anual y mensual.
+- Apertura y descarga de los cuatro documentos contractuales.
 
-## 2. Fuentes
+## 3. Fuentes y publicación
 
-- Bases Técnicas Generales de Licitación de 2024.
-- Extracto seguro de `GANTT BT - JUNIO 2026.xlsx`.
-- No se incorporan datos personales en la publicación.
+- Bases Técnicas Generales.
+- Bases Técnicas Especiales Zona 6.
+- Aclaración N.º 1.
+- Bases Administrativas.
 
-## 3. Automatizaciones
+El archivo maestro es `artifact.json`, la vista publicada es `index.html` y GitHub Actions mantiene GitHub Pages. Ante cualquier diferencia, prevalece el documento contractual oficial y sus modificaciones expresas.
 
-- **Archivo maestro:** `artifact.json` conserva la estructura del tablero.
-- **Vista web:** `index.html` contiene la versión autónoma para consulta.
-- **Publicación automática:** GitHub Actions publica exclusivamente la vista web en GitHub Pages.
-- **Actualización:** los cambios de contenido deben respaldarse en las fuentes técnicas antes de publicarse.
-
-## Accesos del ecosistema
+### 3.1 Ecosistema
 
 - [Provisiones](https://nburgosfigueroa-bit.github.io/PROVISIONES-MAIPU-ZONA-6/)
 - [Flota](https://nburgosfigueroa-bit.github.io/FLOTA-ZONA-6/)
 - [Arbolado urbano](https://nburgosfigueroa-bit.github.io/ARBOLADO-URBANO-ZONA-6/)
-- [Base técnica](https://nburgosfigueroa-bit.github.io/BASE-TECNICA-MAIP-ZONA-6/)
 - [Dotación](https://nburgosfigueroa-bit.github.io/DOTACION-DASHBOARD/)
 
-## Criterio de precisión
+### 3.2 Estado de módulos futuros
 
-La página es una ayuda visual. Ante cualquier diferencia, prevalece el documento contractual oficial y su numeración original.
+- Infraestructura: inventario y programa anual en construcción.
+- Credenciales: acceso pendiente de confirmar.
+- Programa mensual: preparado para recibir la Carta Gantt operativa.
+
+### 3.3 Precisión
+
+“Sin información registrada” no equivale a cero, cumplimiento ni incumplimiento. La ejecución requiere evidencia operativa.
